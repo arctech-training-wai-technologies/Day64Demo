@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day64Demo", "Day64Demo\Day64Demo.csproj", "{3CB1438A-CB8D-4D84-80CC-CD78137998A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day64Demo", "Day64Demo\Day64Demo.csproj", "{3CB1438A-CB8D-4D84-80CC-CD78137998A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day64DemoAuthentication", "Day64DemoAuthentication\Day64DemoAuthentication.csproj", "{19B66126-B34D-4A20-9AAF-9FBE4F856B3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3CB1438A-CB8D-4D84-80CC-CD78137998A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CB1438A-CB8D-4D84-80CC-CD78137998A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CB1438A-CB8D-4D84-80CC-CD78137998A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B66126-B34D-4A20-9AAF-9FBE4F856B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B66126-B34D-4A20-9AAF-9FBE4F856B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B66126-B34D-4A20-9AAF-9FBE4F856B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B66126-B34D-4A20-9AAF-9FBE4F856B3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
