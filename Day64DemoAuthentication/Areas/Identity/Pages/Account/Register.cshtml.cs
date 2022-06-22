@@ -30,15 +30,18 @@ namespace Day64DemoAuthentication.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationIdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<ApplicationIdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             IUserStore<ApplicationIdentityUser> userStore,
             SignInManager<ApplicationIdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -105,6 +108,9 @@ namespace Day64DemoAuthentication.Areas.Identity.Pages.Account
 
             [Display(Name = "Age")]
             public int Age { get; set; }
+
+            [Display(Name = "Role")] 
+            public string Role { get; set; }
         }
 
 
@@ -125,13 +131,25 @@ namespace Day64DemoAuthentication.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                //**************************************************************************
                 user.PhoneNumber = Input.PhoneNumber;
                 user.Age = Input.Age;
-                
+                //**************************************************************************
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+                    //**************************************************************************
+                    // Pre checking if this role is available in the database
+                    var role = await _roleManager.FindByNameAsync(Input.Role);
+                    // if not available insert it
+                    if (role == null) await _roleManager.CreateAsync(new IdentityRole(Input.Role));
+
+                    // Associate this role with current user
+                    await _userManager.AddToRoleAsync(user, Input.Role);
+                    //**************************************************************************
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

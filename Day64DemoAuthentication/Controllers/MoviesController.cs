@@ -47,7 +47,7 @@ namespace Day64DemoAuthentication.Controllers
         }
 
         // GET: Movies/Create
-        [Authorize]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -58,7 +58,7 @@ namespace Day64DemoAuthentication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Create([Bind("Id,Title,ReleaseYear,Budget")] Movie movie)
         {
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace Day64DemoAuthentication.Controllers
         }
 
         // GET: Movies/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Movies == null)
@@ -92,7 +92,7 @@ namespace Day64DemoAuthentication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseYear,Budget")] Movie movie)
         {
             if (id != movie.Id)
@@ -124,7 +124,7 @@ namespace Day64DemoAuthentication.Controllers
         }
 
         // GET: Movies/Delete/5
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Movies == null)
@@ -145,7 +145,7 @@ namespace Day64DemoAuthentication.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Movies == null)
